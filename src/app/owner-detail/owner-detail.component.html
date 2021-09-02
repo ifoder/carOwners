@@ -1,0 +1,151 @@
+<form [formGroup]="ownerForm" (ngSubmit)="onSubmit()" #formDir="ngForm">
+  <div class="initials">
+    <div class="initials__row">
+      <div class="initials__label">Фамилия</div>
+
+      <mat-form-field class="initials__formfield" appearance="outline">
+        <input matInput type="text" id="lastName" formControlName="lastName" />
+        <mat-error *ngIf="lastName.invalid && lastName.touched">
+          {{ getValidationError(lastName, 1) }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="initials__row">
+      <div class="initials__label">Имя</div>
+
+      <mat-form-field class="initials__formfield" appearance="outline">
+        <input
+          matInput
+          type="text"
+          id="firstName"
+          formControlName="firstName"
+        />
+        <mat-error *ngIf="firstName.invalid && firstName.touched">
+          {{ getValidationError(firstName, 1) }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="initials__row">
+      <div class="initials__label">Отчество</div>
+
+      <mat-form-field class="initials__formfield" appearance="outline">
+        <input
+          matInput
+          type="text"
+          id="middleName"
+          formControlName="middleName"
+        />
+        <mat-error *ngIf="middleName.invalid && middleName.touched">
+          {{ getValidationError(middleName, 1) }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <h1>Автомобили</h1>
+
+  <table class="cars">
+    <tr class="cars__head">
+      <td>Номер</td>
+      <td>Марка</td>
+      <td>Модель</td>
+      <td>Год</td>
+      <td></td>
+    </tr>
+    <ng-container formArrayName="cars">
+      <tr
+        *ngFor="let carForm of cars.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <td>
+          <mat-form-field class="cars__formfield" appearance="outline">
+            <input matInput formControlName="numberplate" />
+            <mat-error
+              *ngIf="
+                cars.controls[i].get('numberplate')?.invalid &&
+                cars.controls[i].get('numberplate')?.touched
+              "
+            >
+              {{ getValidationError(cars.controls[i].get("numberplate"), 2) }}
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="cars__formfield" appearance="outline">
+            <input matInput formControlName="brand" />
+            <mat-error
+              *ngIf="
+                cars.controls[i].get('brand')?.invalid &&
+                cars.controls[i].get('brand')?.touched
+              "
+            >
+              {{ getValidationError(cars.controls[i].get("brand"), 1) }}
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="cars__formfield" appearance="outline">
+            <input matInput formControlName="model" />
+            <mat-error
+              *ngIf="
+                cars.controls[i].get('model')?.invalid &&
+                cars.controls[i].get('model')?.touched
+              "
+            >
+              {{ getValidationError(cars.controls[i].get("model"), 1) }}
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="cars__formfield" appearance="outline">
+            <input matInput formControlName="year" type="number" />
+            <mat-error
+              *ngIf="
+                cars.controls[i].get('year')?.invalid &&
+                cars.controls[i].get('year')?.touched
+              "
+            >
+              {{ getValidationError(cars.controls[i].get("year"), 3) }}
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <button
+            type="button"
+            mat-flat-button
+            color="warn"
+            (click)="deleteCar(i)"
+            *ngIf="!review"
+          >
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <div class="action">
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      (click)="addCar()"
+      *ngIf="!review"
+    >
+      <mat-icon>add</mat-icon> Добавить автомобиль</button
+    ><br />
+    <button
+      type="button"
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="!ownerForm.valid"
+      *ngIf="!review"
+    >
+      <mat-icon>save</mat-icon> Сохранить
+    </button>
+    <button type="button" mat-raised-button (click)="backButtonClicked()">
+      <mat-icon>arrow_back</mat-icon>Назад
+    </button>
+  </div>
+</form>
+<mat-spinner id="loading"></mat-spinner>

@@ -1,0 +1,85 @@
+.initials {
+  display: flex;
+  flex-flow: row wrap;
+
+  &__label {
+    font-size: 18px;
+    margin: 0 10px 20px 0;
+    width: 80px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+  }
+
+  &__formfield {
+    width: 250px;
+  }
+}
+
+.initials > * {
+  flex: 1 100%;
+}
+
+.cars {
+  &__head {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  button {
+    margin-bottom: 15px;
+    height: 40px;
+    min-width: 40px;
+
+    padding: 0 !important;
+
+    mat-icon {
+      font-size: 20px;
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  &__formfield {
+    width: 160px;
+    margin-bottom: -5px;
+    .example-tooltip-red {
+      background: #b71c1c;
+    }
+  }
+
+  .mat-error {
+    white-space: nowrap;
+    margin: 0 0 10px;
+  }
+}
+
+.action > * {
+  margin: 5px;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+  padding: 0.6em 0px !important;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-label {
+  margin-top: -15px;
+}
+::ng-deep label.ng-star-inserted {
+  transform: translateY(-0.59375em) scale(0.75) !important;
+}
+
+::ng-deep .mat-input-element:disabled,
+.mat-form-field-type-mat-native-select.mat-form-field-disabled
+  .mat-form-field-infix::after {
+  color: rgb(0 0 0 / 54%);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-disabled
+  .mat-form-field-outline {
+  color: rgb(0 0 0 / 0%);
+  box-shadow: 0px 0px 9px #7b7b7b36;
+}
